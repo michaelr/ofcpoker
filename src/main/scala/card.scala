@@ -1,6 +1,6 @@
 package poker
 
-class card (
+class Card (
   val rank :Int,
   val suit :Char ) {
 }
