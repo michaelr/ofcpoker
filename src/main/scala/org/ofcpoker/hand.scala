@@ -1,7 +1,7 @@
 package org.ofcpoker
 
-class Hand ( val cards :List[Card] ) extends Ordered[Hand]{
-  require(cards.length == 5);
+abstract class Hand ( val cards :List[Card], val cardsInHand :Int ) extends Ordered[Hand]{
+  require (cards.length == cardsInHand)
 
   val sortedCards = cards.sorted.reverse
   val rank        = this.computeRank;
@@ -10,7 +10,7 @@ class Hand ( val cards :List[Card] ) extends Ordered[Hand]{
           "Full House", "Flush", "3 of a Kind", "Two Pair",
           "Pair", "Straight", "High Card").reverse.indexOf(rank);
 
-  def this(cards :String) = this(cards.split(" ").map(new Card(_)).toList)
+  def this(cards :String) = this(cards.split(" ").map(new Card(_)).toList, cards.split(" ").length )
 
   override def toString = cards.mkString(" ")
 
@@ -68,7 +68,7 @@ class Hand ( val cards :List[Card] ) extends Ordered[Hand]{
     }
   }
 
-  private def rankCombos :List[Int] = {
+  protected def rankCombos :List[Int] = {
     val cardRanks = cards.map(_.rank);
     val distinctRanks = cardRanks.distinct;
     distinctRanks
@@ -89,7 +89,7 @@ class Hand ( val cards :List[Card] ) extends Ordered[Hand]{
     if(this.rankValue != that.rankValue)
       return this.rankValue.compare(that.rankValue)
 
-    for( i <- 0 to 4) {
+    for( i <- 0 to cardsInHand - 1) {
       val cardCompare = this.sortedCards(i).compare(that.sortedCards(i))
       if( cardCompare != 0 )
         return cardCompare
