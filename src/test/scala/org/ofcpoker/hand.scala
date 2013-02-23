@@ -53,6 +53,11 @@ class HandSuite extends FunSuite {
     assert(hand.rank == "Straight")
   }
 
+  test("Wheel Straight") {
+    val hand = new Hand("Ac 2s 3d 4s 5h");
+    assert(hand.rank == "Straight")
+  }
+
   test("Royal Flush") {
     val hand = new Hand("Ac Tc Qc Kc Jc");
     assert(hand.rank == "Royal Flush")

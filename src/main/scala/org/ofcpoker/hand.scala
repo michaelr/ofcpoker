@@ -30,18 +30,20 @@ class Hand ( val cards :List[Card] ) {
   }
 
   private def isStraight :Boolean = {
+    println(this.rankDifference)
     return this.rankDifference match {
       case List(1,1,1,1) => true
+      case List(9,1,1,1) => true // A 5 4 3 2
       case _             => false
     }
   }
 
   private def rankDifference :List[Int]= {
-    return sortedCards
-          .map(_.rankInt)
-          .sliding(2,1)
-          .toList
-          .map(pair => pair(0) - pair(1))
+    sortedCards
+      .map(_.rankInt)
+      .sliding(2,1)
+      .toList
+      .map(pair => pair(0) - pair(1))
   }
 
 }
