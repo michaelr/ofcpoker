@@ -1,4 +1,4 @@
-package poker
+package org.ofcpoker
 
 class Card ( val r :Char, val s :Char ) extends Ordered[Card]{
   val rank = r.toUpper

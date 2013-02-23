@@ -1,5 +1,5 @@
 import org.scalatest.FunSuite
-import poker._
+import org.ofcpoker._
 
 class CardSuite extends FunSuite {
   test("New card") {
