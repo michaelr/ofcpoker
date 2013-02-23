@@ -37,6 +37,10 @@ class CardSuite extends FunSuite {
     assert(new Card("Ah").toString === "Ah");
   }
 
+  test("cart.rankInt") {
+    assert(new Card("2d").rankInt == 2);
+  }
+
 }
 
 class HandSuite extends FunSuite {
@@ -77,7 +81,8 @@ class HandSuite extends FunSuite {
   }
 
   test("hand.sorted") {
-    val hand = new Hand("As Kd 5c 8h 4s");
+    val hand = new Hand("Kd As 5c 8h 4s");
+    assert(hand.sortedCards.mkString(" ") == "As Kd 8h 5c 4s");
   }
 
 
