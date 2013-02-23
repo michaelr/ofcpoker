@@ -72,4 +72,13 @@ class HandSuite extends FunSuite {
     val hand = new Hand("As","Kd","5c","8h","4s");
   }
 
+  test("hand.toString") {
+    assert(new Hand("As","Kd","5c","8h","4s").toString == "As Kd 5c 8h 4s");
+  }
+
+  test("hand.sorted") {
+    val hand = new Hand("As","Kd","5c","8h","4s");
+  }
+
+
 }
