@@ -13,13 +13,18 @@ class Hand ( val cards :List[Card] ) {
     if( this.isRoyal )          return "Royal Flush"
     if( this.isStraightFlush )  return "Straight Flush"
     if( this.is4OfAKind)        return "4 of a Kind"
+    if( this.isFullHouse)       return "Full House"
     if( this.isFlush )          return "Flush"
     if( this.isStraight)        return "Straight"
                                 return "High Card"
   }
 
   private def is4OfAKind :Boolean = {
-    rankCombos(0)._2 == 4
+    rankCombos == List(4,1)
+  }
+
+  private def isFullHouse :Boolean = {
+    rankCombos == List(3,2)
   }
 
   private def isRoyal :Boolean = {
@@ -42,12 +47,13 @@ class Hand ( val cards :List[Card] ) {
     }
   }
 
-  private def rankCombos :List[(Char,Int)] = {
+  private def rankCombos :List[Int] = {
     val cardRanks = cards.map(_.rank);
     val distinctRanks = cardRanks.distinct;
     distinctRanks
-      .map(x => (x,cardRanks.count(y => x == y)))
-      .sortWith((x,y) => x._2 >= y._2)
+      .map(x => cardRanks.count(y => x == y))
+      .sorted
+      .reverse
   }
 
   private def rankDifference :List[Int]= {
