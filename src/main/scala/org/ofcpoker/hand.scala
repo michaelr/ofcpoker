@@ -17,6 +17,7 @@ class Hand ( val cards :List[Card] ) {
     if( this.isFlush )          return "Flush"
     if( this.is3OfAKind)        return "3 of a Kind"
     if( this.isTwoPair)         return "Two Pair"
+    if( this.isPair)            return "Pair"
     if( this.isStraight)        return "Straight"
                                 return "High Card"
   }
@@ -31,6 +32,10 @@ class Hand ( val cards :List[Card] ) {
 
   private def isTwoPair :Boolean = {
     rankCombos == List(2,2,1)
+  }
+
+  private def isPair :Boolean = {
+    rankCombos == List(2,1,1,1)
   }
 
   private def isFullHouse :Boolean = {
