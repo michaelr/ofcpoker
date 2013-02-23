@@ -10,9 +10,14 @@ class Hand ( val cards :List[Card] ) {
   override def toString = cards.mkString(" ")
 
   def rank :String = {
+    if( this.isRoyal )   return "Royal Flush"
     if( this.isFlush )   return "Flush"
     if( this.isStraight) return "Straight"
     return "High Card"
+  }
+
+  def isRoyal :Boolean = {
+    return sortedCards.head.rank == 'A' && isFlush && isStraight;
   }
 
   def isFlush :Boolean = {
