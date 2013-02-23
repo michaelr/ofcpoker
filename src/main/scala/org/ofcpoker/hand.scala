@@ -14,6 +14,7 @@ class Hand ( val cards :List[Card] ) {
     if( this.isStraightFlush )  return "Straight Flush"
     if( this.is4OfAKind)        return "4 of a Kind"
     if( this.isFullHouse)       return "Full House"
+    if( this.is3OfAKind)        return "3 of a Kind"
     if( this.isFlush )          return "Flush"
     if( this.isStraight)        return "Straight"
                                 return "High Card"
@@ -21,6 +22,10 @@ class Hand ( val cards :List[Card] ) {
 
   private def is4OfAKind :Boolean = {
     rankCombos == List(4,1)
+  }
+
+  private def is3OfAKind :Boolean = {
+    rankCombos == List(3,1,1)
   }
 
   private def isFullHouse :Boolean = {
