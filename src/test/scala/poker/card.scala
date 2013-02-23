@@ -51,7 +51,7 @@ class HandSuite extends FunSuite {
       );
   }
 
-  test("Invalid rank") {
+  test("Invalid hand: too few cards") {
     try {
       val hand = new Hand(
         List(
