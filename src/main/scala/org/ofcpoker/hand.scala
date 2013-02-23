@@ -4,12 +4,13 @@ class Hand ( val cards :List[Card] ) {
   require(cards.length == 5);
 
   val sortedCards = cards.sorted.reverse
+  val rank        = this.computeRank;
 
   def this(cards :String) = this(cards.split(" ").map(new Card(_)).toList)
 
   override def toString = cards.mkString(" ")
 
-  def rank :String = {
+  def computeRank :String = {
     if( this.isRoyal )          return "Royal Flush"
     if( this.isStraightFlush )  return "Straight Flush"
     if( this.is4OfAKind)        return "4 of a Kind"
