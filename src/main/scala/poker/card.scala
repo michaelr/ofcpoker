@@ -12,3 +12,7 @@ class Card ( val r :Char, val s :Char ) {
   override def toString = rank.toString + suit.toString
 
 }
+
+class Hand ( val cards :List[Card] ) {
+  require(cards.length == 5);
+}

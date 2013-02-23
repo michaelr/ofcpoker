@@ -38,3 +38,34 @@ class CardSuite extends FunSuite {
   }
 
 }
+
+class HandSuite extends FunSuite {
+  test("New Hand") {
+    val hand = new Hand(
+      List(
+        new Card("2s"),
+        new Card("3s"),
+        new Card("4s"),
+        new Card("5s"),
+        new Card("6s"))
+      );
+  }
+
+  test("Invalid rank") {
+    try {
+      val hand = new Hand(
+        List(
+          new Card("2s"),
+          new Card("3s"),
+          new Card("4s"),
+          new Card("5s")
+        ))
+
+      fail()
+    }
+    catch {
+      case _: IllegalArgumentException =>
+    }
+  }
+
+}
