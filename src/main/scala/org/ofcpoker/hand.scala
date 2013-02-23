@@ -10,21 +10,26 @@ class Hand ( val cards :List[Card] ) {
   override def toString = cards.mkString(" ")
 
   def rank :String = {
-    if( this.isRoyal )   return "Royal Flush"
-    if( this.isFlush )   return "Flush"
-    if( this.isStraight) return "Straight"
-    return "High Card"
+    if( this.isRoyal )          return "Royal Flush"
+    if( this.isStraightFlush )  return "Straight Flush"
+    if( this.isFlush )          return "Flush"
+    if( this.isStraight)        return "Straight"
+                                return "High Card"
   }
 
-  def isRoyal :Boolean = {
-    return sortedCards.head.rank == 'A' && isFlush && isStraight;
+  private def isRoyal :Boolean = {
+    return sortedCards.last.rank == 'T' && isStraightFlush
   }
 
-  def isFlush :Boolean = {
+  private def isStraightFlush :Boolean = {
+    return isFlush && isStraight;
+  }
+
+  private def isFlush :Boolean = {
     return cards.map(_.suit).distinct.size == 1;
   }
 
-  def isStraight :Boolean = {
+  private def isStraight :Boolean = {
     return this.rankDifference match {
       case List(1,1,1,1) => true
       case _             => false
