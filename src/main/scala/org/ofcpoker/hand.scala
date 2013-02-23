@@ -1,10 +1,14 @@
 package org.ofcpoker
 
-class Hand ( val cards :List[Card] ) {
+class Hand ( val cards :List[Card] ) extends Ordered[Hand]{
   require(cards.length == 5);
 
   val sortedCards = cards.sorted.reverse
   val rank        = this.computeRank;
+  val rankValue :Int =
+    List( "Royal Flush", "Straight Flush", "4 of a Kind",
+          "Full House", "Flush", "3 of a Kind", "Two Pair",
+          "Pair", "Straight", "High Card").reverse.indexOf(rank);
 
   def this(cards :String) = this(cards.split(" ").map(new Card(_)).toList)
 
@@ -22,6 +26,7 @@ class Hand ( val cards :List[Card] ) {
     if( this.isStraight)        return "Straight"
                                 return "High Card"
   }
+
 
   private def is4OfAKind :Boolean = {
     rankCombos == List(4,1)
@@ -80,4 +85,21 @@ class Hand ( val cards :List[Card] ) {
       .map(pair => pair(0) - pair(1))
   }
 
+  def compare(that :Hand) :Int = {
+    if(this.rankValue != that.rankValue)
+      return this.rankValue.compare(that.rankValue)
+
+    for( i <- 0 to 4) {
+      val cardCompare = this.sortedCards(i).compare(that.sortedCards(i))
+      if( cardCompare != 0 )
+        return cardCompare
+    }
+    return 0
+  }
+
+  // XXX this needs to be fixed. see ch. 30 programming in scala
+  def equals(that :Hand) :Boolean = {
+    return this.compare(that) == 0
+  }
+  def ==(that :Hand) :Boolean = this equals that
 }

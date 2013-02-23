@@ -20,5 +20,6 @@ class Card ( val r :Char, val s :Char ) extends Ordered[Card]{
   override def toString = rank.toString + suit.toString
 
   def compare(that :Card) = this.rankInt.compare(that.rankInt)
+  def equals(that :Card)  = this.rankInt == that.rankInt
 }
 

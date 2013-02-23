@@ -97,4 +97,24 @@ class HandSuite extends FunSuite {
     val hand = new Hand("3s Qs Kc 2d 4h");
     assert(hand.rank == "High Card")
   }
+
+  test("royal  > two pair") {
+    assert( new Hand("As Ks Qs Js Ts") > new Hand("Td Th 4s 4c 2d"))
+  }
+
+  test("royal == royal") {
+    assert( new Hand("As Ks Qs Js Ts") equals new Hand("Ad Kd Qd Jd Td"))
+  }
+
+  test("flush over flush") {
+    assert( new Hand("5s Ks Qs Js Ts") > new Hand("2d Kd Qd Jd Td"))
+  }
+
+  test("high card over high card") {
+    assert( new Hand("5c Ks Qd Js Ts") > new Hand("2s 5d Qh Jd Tc"))
+  }
+
+  test("high card == high card") {
+    assert( new Hand("5c Ks Qd Js Ts") == new Hand("5s Kc Qs Jh Td"))
+  }
 }
