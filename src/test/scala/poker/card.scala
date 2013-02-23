@@ -68,4 +68,8 @@ class HandSuite extends FunSuite {
     }
   }
 
+  test("Strings constructor") {
+    val hand = new Hand("As","Kd","5c","8h","4s");
+  }
+
 }
