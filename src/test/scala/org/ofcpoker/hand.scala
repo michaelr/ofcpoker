@@ -43,9 +43,13 @@ class HandSuite extends FunSuite {
     assert(hand.sortedCards.mkString(" ") == "As Kd 8h 5c 4s");
   }
 
-  test("flush") {
+  test("Flush") {
     val hand = new Hand("Ks As 5s 8s 4s");
     assert(hand.rank == "Flush")
   }
 
+  test("Straight") {
+    val hand = new Hand("Ac Ts Qd Ks Jh");
+    assert(hand.rank == "Straight")
+  }
 }
