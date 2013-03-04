@@ -1,5 +1,6 @@
 import org.scalatest.FunSuite
 import org.ofcpoker._
+import org.ofcpoker.HandRank._
 
 class ThreeCardHandSuite extends FunSuite {
   test("New Hand") {
@@ -44,17 +45,17 @@ class ThreeCardHandSuite extends FunSuite {
 
   test("Three of a Kind") {
     val hand = new ThreeCardHand("2d 2s 2h");
-    assert(hand.rank == "3 of a Kind")
+    assert(hand.rank == ThreeOfAKind)
   }
 
   test("Pair") {
     val hand = new ThreeCardHand("3s Qs Qc");
-    assert(hand.rank == "Pair")
+    assert(hand.rank == Pair)
   }
 
   test("High Card") {
     val hand = new ThreeCardHand("3s Qs Kc");
-    assert(hand.rank == "High Card")
+    assert(hand.rank == HighCard)
   }
 
   test("high card over high card") {

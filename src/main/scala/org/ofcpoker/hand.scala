@@ -1,32 +1,27 @@
 package org.ofcpoker
+import org.ofcpoker.HandRank._
+
 
 abstract class Hand ( val cards :List[Card], val cardsInHand :Int ) extends Ordered[Hand]{
   require (cards.length == cardsInHand)
 
+
   val sortedCards = cards.sorted.reverse
-  val rank        = this.computeRank;
-  val rankValue :Int =
-    List( "Royal Flush", "Straight Flush", "4 of a Kind",
-          "Full House", "Flush", "3 of a Kind", "Two Pair",
-          "Pair", "Straight", "High Card").reverse.indexOf(rank);
+  val rank :HandRank =
+    if( this.isRoyal )              RoyalFlush
+    else if( this.isStraightFlush ) StraightFlush
+    else if( this.is4OfAKind)       FourOfAKind
+    else if( this.isFullHouse)      FullHouse
+    else if( this.isFlush )         Flush
+    else if( this.isStraight)       Straight
+    else if( this.is3OfAKind)       ThreeOfAKind
+    else if( this.isTwoPair)        TwoPair
+    else if( this.isPair)           Pair
+    else                            HighCard
 
   def this(cards :String) = this(cards.split(" ").map(new Card(_)).toList, cards.split(" ").length )
 
   override def toString = cards.mkString(" ")
-
-  def computeRank :String = {
-    if( this.isRoyal )          return "Royal Flush"
-    if( this.isStraightFlush )  return "Straight Flush"
-    if( this.is4OfAKind)        return "4 of a Kind"
-    if( this.isFullHouse)       return "Full House"
-    if( this.isFlush )          return "Flush"
-    if( this.is3OfAKind)        return "3 of a Kind"
-    if( this.isTwoPair)         return "Two Pair"
-    if( this.isPair)            return "Pair"
-    if( this.isStraight)        return "Straight"
-                                return "High Card"
-  }
-
 
   private def is4OfAKind :Boolean = {
     rankCombos == List(4,1)
@@ -86,8 +81,8 @@ abstract class Hand ( val cards :List[Card], val cardsInHand :Int ) extends Orde
   }
 
   def compare(that :Hand) :Int = {
-    if(this.rankValue != that.rankValue)
-      return this.rankValue.compare(that.rankValue)
+    if(this.rank != that.rank)
+      return this.rank.compare(that.rank)
 
     for( i <- 0 to cardsInHand - 1) {
       val cardCompare = this.sortedCards(i).compare(that.sortedCards(i))

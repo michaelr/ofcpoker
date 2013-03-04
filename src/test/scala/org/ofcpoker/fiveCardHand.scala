@@ -1,5 +1,6 @@
 import org.scalatest.FunSuite
 import org.ofcpoker._
+import org.ofcpoker.HandRank._
 
 class FiveCardHandSuite extends FunSuite {
   test("New FiveCardHand") {
@@ -45,57 +46,57 @@ class FiveCardHandSuite extends FunSuite {
 
   test("Flush") {
     val hand = new FiveCardHand("Ks As 5s 8s 4s");
-    assert(hand.rank == "Flush")
+    assert(hand.rank == Flush)
   }
 
   test("Straight") {
     val hand = new FiveCardHand("Ac Ts Qd Ks Jh");
-    assert(hand.rank == "Straight")
+    assert(hand.rank == Straight)
   }
 
   test("Wheel Straight") {
     val hand = new FiveCardHand("Ac 2s 3d 4s 5h");
-    assert(hand.rank == "Straight")
+    assert(hand.rank == Straight)
   }
 
   test("Royal Flush") {
     val hand = new FiveCardHand("Ac Tc Qc Kc Jc");
-    assert(hand.rank == "Royal Flush")
+    assert(hand.rank == RoyalFlush)
   }
 
   test("Straight Flush") {
     val hand = new FiveCardHand("9c Tc Qc Kc Jc");
-    assert(hand.rank == "Straight Flush")
+    assert(hand.rank == StraightFlush)
   }
 
   test("4 of a Kind") {
     val hand = new FiveCardHand("Jc 2c 2d 2s 2h");
-    assert(hand.rank == "4 of a Kind")
+    assert(hand.rank == FourOfAKind)
   }
 
   test("Full House") {
     val hand = new FiveCardHand("Jc Js 2c 2s 2d");
-    assert(hand.rank == "Full House")
+    assert(hand.rank == FullHouse)
   }
 
   test("Three of a Kind") {
     val hand = new FiveCardHand("Jc Qc 2d 2s 2h");
-    assert(hand.rank == "3 of a Kind")
+    assert(hand.rank == ThreeOfAKind)
   }
 
   test("Two Pair") {
     val hand = new FiveCardHand("Qs Qc 2d 2s 3h");
-    assert(hand.rank == "Two Pair")
+    assert(hand.rank == TwoPair)
   }
 
   test("Pair") {
     val hand = new FiveCardHand("3s Qs Qc 2d 4h");
-    assert(hand.rank == "Pair")
+    assert(hand.rank == Pair)
   }
 
   test("High Card") {
     val hand = new FiveCardHand("3s Qs Kc 2d 4h");
-    assert(hand.rank == "High Card")
+    assert(hand.rank == HighCard)
   }
 
   test("royal  > two pair") {
