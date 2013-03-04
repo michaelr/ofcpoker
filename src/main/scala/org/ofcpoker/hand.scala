@@ -5,8 +5,24 @@ import org.ofcpoker.HandRank._
 abstract class Hand ( val cards :List[Card], val cardsInHand :Int ) extends Ordered[Hand]{
   require (cards.length == cardsInHand)
 
-
   val sortedCards = cards.sorted.reverse
+  val rankCombos :List[Int] = {
+    val cardRanks = cards.map(_.rank);
+    val distinctRanks = cardRanks.distinct;
+    distinctRanks
+      .map(x => cardRanks.count(y => x == y))
+      .sorted
+      .reverse
+  }
+
+  val rankDifference :List[Int]= {
+    sortedCards
+      .map(_.rankInt)
+      .sliding(2,1)
+      .toList
+      .map(pair => pair(0) - pair(1))
+  }
+
   val rank :HandRank =
     if( this.isRoyal )              RoyalFlush
     else if( this.isStraightFlush ) StraightFlush
@@ -63,22 +79,6 @@ abstract class Hand ( val cards :List[Card], val cardsInHand :Int ) extends Orde
     }
   }
 
-  protected def rankCombos :List[Int] = {
-    val cardRanks = cards.map(_.rank);
-    val distinctRanks = cardRanks.distinct;
-    distinctRanks
-      .map(x => cardRanks.count(y => x == y))
-      .sorted
-      .reverse
-  }
-
-  private def rankDifference :List[Int]= {
-    sortedCards
-      .map(_.rankInt)
-      .sliding(2,1)
-      .toList
-      .map(pair => pair(0) - pair(1))
-  }
 
   def compare(that :Hand) :Int = {
     if(this.rank != that.rank)
