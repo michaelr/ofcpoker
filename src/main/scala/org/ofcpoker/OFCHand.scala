@@ -28,4 +28,11 @@ class OFCHand (
   def middleHand = new FiveCardHand(middle.toList)
   def bottomHand = new FiveCardHand(bottom.toList)
 
+  def score(against :OFCHand) :Int = {
+    if( !this.complete || !against.complete )
+      throw new RuntimeException("Hands must be complete to score")
+
+    return 0
+  }
+
 }
