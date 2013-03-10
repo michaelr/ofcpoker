@@ -32,6 +32,11 @@ class OFCHand (
     if( !this.complete || !against.complete )
       throw new RuntimeException("Hands must be complete to score")
 
+    if(against.misset && !this.misset)
+      return 6
+    if(this.misset && !against.misset)
+      return -6
+
     return 0
   }
 
